@@ -1,0 +1,51 @@
+{
+  "name": "spark",
+  "version": "0.0.0",
+  "description": "Send email marketing using SparkPost and markdown files.",
+  "bin": {
+    "spark": "./src/cli.ts"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test yet 😬\" && exit 1",
+    "postinstall": "chmod 600 ./db/config/access && chmod +x ./db/config/log && chmod +x ./src/cli.ts && cp -rf .env.example .env && cp -rf src/query.ts.example src/query.ts && bun link",
+    "db:build": "docker build -t spark-db -f db/Dockerfile .",
+    "db:run": "bun run db:remove && docker run -d --name spark-db -p 27018:27017 -v ./db/data:/data/db -v ./db/config:/config --restart always --env-file ./.env spark-db",
+    "db:seed": "bun run src/seed.ts",
+    "db:remove": "docker rm -f spark-db || true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stewones/spark-cast.git"
+  },
+  "keywords": [
+    "transactional",
+    "email",
+    "email",
+    "marketing",
+    "sparkpost"
+  ],
+  "author": "Stewan Silva",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stewones/spark-cast/issues"
+  },
+  "homepage": "https://github.com/stewones/spark-cast#readme",
+  "devDependencies": {
+    "bun-types": "latest",
+    "@types/sparkpost": "^2.1.8"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.9.0",
+    "@faker-js/faker": "^9.3.0",
+    "@google-cloud/storage": "^7.7.0",
+    "@types/marked": "^6.0.0",
+    "@types/semver": "^7.5.6",
+    "gray-matter": "^4.0.3",
+    "marked": "^15.0.5",
+    "mongodb": "^6.12.0",
+    "semver": "^7.5.4",
+    "sparkpost": "https://github.com/stewones/node-sparkpost",
+    "zx": "^7.2.3"
+  }
+}

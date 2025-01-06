@@ -1,0 +1,15 @@
+# environment variables
+.env
+
+# db data
+db/data
+#/config/access # if you're reusing this project elsewhere, make sure to uncomment this line and to NOT commit your secrets!
+
+# dependencies
+node_modules
+
+# sparkcast
+src/query.ts
+
+# system files
+.DS_Store

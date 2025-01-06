@@ -1,0 +1,14 @@
+import { User } from './types/user';
+
+export const MONGO_QUERY = {
+  collection: "users",
+  filter: {
+    purchases: { $gt: 0 },
+  },
+  transform: (user: User) => {
+    return {
+      name: user.name,
+      email: user.email,
+    };
+  },
+};
